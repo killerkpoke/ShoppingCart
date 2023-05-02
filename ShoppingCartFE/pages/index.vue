@@ -1,6 +1,11 @@
 <template>
-  <div class="flex place-content-center ">
-    <Card />
+  <div class="md:flex md:place-content-center ">
+    <div class="w-1/2">
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+    </div>
   </div>
 </template>
 

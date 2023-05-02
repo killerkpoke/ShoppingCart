@@ -1,5 +1,5 @@
 <template>
-    <div class="m-4 rounded-xl text-black md:w-1/2 w-full">
+    <div class="m-4 rounded-xl text-black">
         <div class="border-t-4 border-gray-700 border-x-4 rounded-t-xl bg-[#e075b5] p-4 flex">
             <div class="w-full mr-2">
                 <p class="text-center text-xl font-bold">Big Cute Banana</p>
