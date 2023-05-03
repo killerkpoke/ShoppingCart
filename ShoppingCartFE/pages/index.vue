@@ -1,6 +1,7 @@
 <template>
-  <div class="md:flex md:place-content-center ">
-    <div class="w-1/2">
+  <div class="flex place-content-center ">
+    <div>
+      <h1 class="text-center font-bold text-5xl my-6 text-white">Emotional Fruit Shop</h1>
       <Card />
       <Card />
       <Card />
