@@ -1,33 +1,60 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
+// import { ShoppingCart } from '~/types/ShoppingCart'
+// import { Tag } from '~/types/Tag'
+
 
 export default defineComponent({
   name: 'Indexpage',
  
   setup() {
+    // const tag = withDefaults(defineProps<Tag>(), {
+    //   Id:1,
+    //   TagName: "Error",
+    //   TagContext: "Danger"
+    // })
+    // const props = withDefaults(defineProps<ShoppingCart>(), {
+    //   Id:1,
+    //   ItemDescription:"Something item in type",
+    //   ItemName: "Big Cute Banana",
+    //   Quantity: 3,
+    //   Tags: [tag]
+    // })
     return {
+      // dummydata: props
+
       dummydata : [
         {
           "id":1,
           "desc":"ItemDescription",
-          "name":"ItemName",
+          "name":"Big Cute Banana",
           "quantity":3,
           "tags":[{
               "id": 1,
               "name": "Error",
-              "context": "danger"
+              "desc": "FATAL ERROR",
+              "context": "error"
           }]
         },
         {
           "id":2,
           "desc":"ItemDescription2",
-          "name":"ItemName2",
+          "name":"Little Cute Banana",
           "quantity":2,
-          "tags":[{
+          "tags":[
+            {
               "id": 1,
               "name": "Error",
-              "context": "danger"
-          }]
+              "desc": "FATAL ERROR",
+              "context": "error"
+            },
+            {
+              "id": 2,
+              "name": "GTK",
+              "desc": "Good to know",
+              "context": "info"
+            },
+          ]
         },
       ]
     }
