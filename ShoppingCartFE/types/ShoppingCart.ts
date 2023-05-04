@@ -6,7 +6,8 @@ interface ShoppingCart {
     ItemDescription:string, 
     ItemImage:string, 
     Quantity: number,
-    isPickedUp:Boolean, 
+    isPickedUp:Boolean,
+    Price: number, 
     
     Tags: Array<Tag>
 }
