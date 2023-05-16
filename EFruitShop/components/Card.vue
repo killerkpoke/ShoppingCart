@@ -15,6 +15,7 @@
             "id": prop.dummy.id,
             "name":prop.dummy.name,
             "price": prop.dummy.price * localCounter.value,
+            "priceEach": prop.dummy.price,
             "quantity":localCounter.value,
         }
         for (let i of selectedItem.value) {

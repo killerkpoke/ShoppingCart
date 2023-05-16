@@ -10,11 +10,13 @@
             <table v-if="selectedItem.length != 0" class="table table-auto text-white">
                 <tr class="text-center">
                     <th>Name</th>
-                    <th>Price</th>
+                    <th>Price/each</th>
+                    <th>Overall Price</th>
                     <th>Quantity</th>
                 </tr>
                 <tr v-for="item in selectedItem" :key="item.id">
                     <td>{{ item.name }}</td>
+                    <td>{{ item.priceEach }}</td>
                     <td>{{ item.price }}</td>
                     <td class="flex font-bold text-center">
                         <button class="btn btn-primary text-xl">-</button>
