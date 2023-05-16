@@ -11,8 +11,6 @@
 </script>
 
 <template>
-
-    
     <div class="m-4 rounded-xl text-black 2xl:w-full max-w-2xl w-auto">
         <div class="border-t-4 border-gray-700 border-x-4 rounded-t-xl bg-[#e075b5] p-4 md:flex grid">
             <div class="mx-4">
