@@ -3,10 +3,28 @@
     let counter = useCounter()
     let price = usePrice()
     let localCounter = ref(0)
+
+    let selectedItem = useSelectedItems()
     function add() {
+        
         counter.value++
         localCounter.value++
         price.value += prop.dummy.price
+
+        const item = {
+            "id": prop.dummy.id,
+            "name":prop.dummy.name,
+            "price": prop.dummy.price * localCounter.value,
+            "quantity":localCounter.value,
+        }
+        for (let i of selectedItem.value) {
+            if (item.id === i.id ) {
+                const index = selectedItem.value.indexOf(i)
+                if (index > -1) selectedItem.value.splice(index, 1)
+            }
+        }
+        selectedItem.value.push(item)
+          
     }
 </script>
 
