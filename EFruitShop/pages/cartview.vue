@@ -1,6 +1,6 @@
 <script setup lang="ts">
     let price = usePrice()
-    const selectedItem = useSelectedItems()   
+    const selectedItem = useSelectedItems()
 </script>
 
 <template>
