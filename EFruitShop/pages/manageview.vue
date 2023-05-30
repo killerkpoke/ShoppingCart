@@ -9,7 +9,11 @@ const data = {
         <div class="m-6">
             <div class="flex items-center">
                 <h1 class="text-4xl m-4 font-semibold">Management View</h1>
-                <button class="btn btn-success">Add new item</button>
+                <button class="btn btn-success">
+                    <NuxtLink to="/addItemview">
+                        Add new item
+                    </NuxtLink>
+                </button>
             </div>
             <div class="overflow-x-auto w-full">
                 <table class="table w-full">
@@ -50,14 +54,14 @@ const data = {
                             <th>
                                 <div class="inline-grid">
                                 <button class="btn btn-warning btn-xl text-white my-2">
-                                    <NuxtLink to="/updateItem">
+                                    <NuxtLink to="/updateItemview">
                                         Update Item
                                     </NuxtLink>
                                 </button>
                                 <button class="btn btn-error btn-xl text-white my-2">
-                                    <NuxtLink to="/deleteItem">
+                                    <!-- <NuxtLink to="/deleteItem"> -->
                                         Delete Item
-                                    </NuxtLink>
+                                    <!-- </NuxtLink> -->
                                 </button></div>
                             </th>
                         </tr>
