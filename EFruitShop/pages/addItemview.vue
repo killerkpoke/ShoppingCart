@@ -7,8 +7,15 @@ defineRule('required', (value: string | any[]) => {
   }
   return true;
 });
-
-
+defineRule('minLength', (value: string | any[], [limit]: any) => {
+  if (!value || !value.length) {
+    return true;
+  }
+  if (value.length < limit) {
+    return `This field must be at least ${limit} characters`;
+  }
+  return true;
+});
 
 function onSubmit(values: object) {
   // Submit values to API...
@@ -16,7 +23,6 @@ function onSubmit(values: object) {
 }
 
 </script>
-
 
 <template>
     <div>
@@ -35,14 +41,14 @@ function onSubmit(values: object) {
                     <label class="label">
                         <span class="label-text">Item price</span>
                     </label>
-                    <Field name="price" type="number" rules="required" class="input w-full max-w-xs bg-white text-black" ></Field>
+                    <Field name="price" type="number" rules="required|minLength:3" class="input w-full max-w-xs bg-white text-black" ></Field>
                     <ErrorMessage name="price" class="text-red-500" />
                 </div>
                 <div class="form-control w-full max-w-xs">
                     <label class="label">
                         <span class="label-text">Item quantity</span>
                     </label>
-                    <Field name="quantity" type="number" rules="required" class="input w-full max-w-xs bg-white text-black" ></Field>
+                    <Field name="quantity" type="number" rules="required|minLength:3" class="input w-full max-w-xs bg-white text-black" ></Field>
                     <ErrorMessage name="quantity" class="text-red-500" />
                 </div>
                 <div class="form-control w-full max-w-xs">
