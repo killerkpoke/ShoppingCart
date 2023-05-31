@@ -1,6 +1,15 @@
 <script setup lang="ts">
 import { Form, Field, ErrorMessage, defineRule  } from 'vee-validate';
 
+let isCreated = useCookie('isCreated', {
+    default: () => false,
+    watch: false
+})
+
+let fruitList = useFruit();
+let userImage: any = null;
+
+
 defineRule('required', (value: string | any[]) => {
   if (!value || !value.length) {
     return 'This field is required';
@@ -17,17 +26,40 @@ defineRule('minLength', (value: string | any[], [limit]: any) => {
   return true;
 });
 
-function onSubmit(values: object) {
-  // Submit values to API...
-  alert(JSON.stringify(values, null, 2));
+function onFileChange(e: any) {
+    let files = e.target.files || e.dataTransfer.files;
+    if (!files.length) {
+      return
+    }
+    createImage(files[0]);
+}
+function createImage(file: any) {
+    const reader = new FileReader()
+    reader.onload = (e) => {
+        userImage = e.target?.result
+        localStorage.setItem('newItemImg', userImage);
+    }
+    reader.readAsDataURL(file)  
 }
 
+function onSubmit(values: object) {
+    fruitList.value.unshift(values);
+    localStorage.setItem('newItem', JSON.stringify(fruitList, null, 2));
+    isCreated.value = true
+}
 </script>
-
 <template>
     <div>
         <Header>
         </Header>
+        <div v-if="isCreated">
+            <div class="alert alert-success shadow-lg">
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <span>Your purchase has been confirmed!</span>
+                </div>
+            </div>
+        </div>
         <div class="flex place-content-center">
             <Form method="POST"  @submit="onSubmit">
                 <div class="form-control w-full max-w-xs">
@@ -55,8 +87,8 @@ function onSubmit(values: object) {
                     <label class="label">
                         <span class="label-text">Item image</span>
                     </label>
-                    <Field name="file" type="file" rules="required" class="file-input file-input-bordered w-full max-w-xs" ></Field>
-                    <ErrorMessage name="file" class="text-red-500" />
+                    <Field name="file" type="file" @change="onFileChange" class="file-input file-input-bordered w-full max-w-xs" ></Field>
+                    <img class="mt-6" :src="userImage" />
                 </div>
                 <button class="btn btn-primary mt-6">
                     <!-- <NuxtLink to="/manageview"> -->
