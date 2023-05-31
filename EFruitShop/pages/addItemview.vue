@@ -43,8 +43,9 @@ function createImage(file: any) {
 }
 
 function onSubmit(values: object) {
+    
     fruitList.value.unshift(values);
-    localStorage.setItem('newItem', JSON.stringify(fruitList, null, 2));
+    localStorage.setItem('newItem', JSON.stringify(fruitList.value, null, 2));
     isCreated.value = true
 }
 </script>

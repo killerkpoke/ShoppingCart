@@ -1,7 +1,6 @@
 <script setup lang="ts">
-const data = {
-    
-} 
+let fruitList = localStorage.getItem('newItem');
+console.log(fruitList);
 </script>
 <template>
     <div>
@@ -32,7 +31,9 @@ const data = {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="[&>*]:bg-[#1c1f25]">
+                        <tr 
+                          
+                        class="[&>*]:bg-[#1c1f25]">
                             <th>
                                 <label>
                                     <input type="checkbox" class="checkbox" />
