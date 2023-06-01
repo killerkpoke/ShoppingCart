@@ -42,11 +42,18 @@ function createImage(file: any) {
     reader.readAsDataURL(file)  
 }
 
-function onSubmit(values: object) {
+function onSubmit(values: any) {
+    const item: Fruit = {
+        id: Math.ceil(Math.random()*1000000),
+        name: values.name,
+        price: values.price,
+        quantity: values.quantity,
+        image: values.image
+    }    
     
-    fruitList.value.unshift(values);
+    fruitList.value.unshift(item);
     localStorage.setItem('newItem', JSON.stringify(fruitList.value, null, 2));
-    isCreated.value = true
+    isCreated.value = true  
 }
 </script>
 <template>
@@ -62,7 +69,7 @@ function onSubmit(values: object) {
             </div>
         </div>
         <div class="flex place-content-center">
-            <Form method="POST"  @submit="onSubmit">
+            <Form method="POST" @submit="onSubmit">
                 <div class="form-control w-full max-w-xs">
                     <label class="label">
                         <span class="label-text">Item name</span>
