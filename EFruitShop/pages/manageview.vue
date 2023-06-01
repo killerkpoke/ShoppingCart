@@ -1,8 +1,15 @@
 <script setup lang="ts">
 
 const localItem:string = localStorage.getItem('newItem') || "{}";
-const fruitList:Fruit = JSON.parse(localItem);
+const fruitList:Array<Fruit> = JSON.parse(localItem);
 
+function deleteItem(id: number) {
+    // for (let i = 0; i < fruitList.length; ++i) {
+    //     if (fruitList[i].id == id) {
+    //         fruitList.splice(i);
+    //     }
+    // }
+}
 </script>
 <template>
     <div>
@@ -29,7 +36,7 @@ const fruitList:Fruit = JSON.parse(localItem);
                     </thead>
                     <tbody>
                         <tr 
-                       v-for="item of fruitList" :key="item.name"
+                       v-for="(item, index) in fruitList" :key="index"
                         class="[&>*]:bg-[#1c1f25] [&>*]:text-center">
                             <td>
                                 <div>{{ item.id }}</div>
@@ -46,7 +53,8 @@ const fruitList:Fruit = JSON.parse(localItem);
                                         Update Item
                                     </NuxtLink>
                                 </button>
-                                <button class="btn btn-error btn-xl text-white my-2">
+                                <button class="btn btn-error btn-xl text-white my-2"
+                                @click="deleteItem(item.id)">
                                     <!-- <NuxtLink to="/deleteItem"> -->
                                         Delete Item
                                     <!-- </NuxtLink> -->
