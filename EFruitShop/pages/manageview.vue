@@ -19,12 +19,7 @@ const fruitList:Fruit = JSON.parse(localItem);
             <div class="overflow-x-auto w-full">
                 <table class="table w-full">
                     <thead>
-                        <tr>
-                            <th>
-                                <label>
-                                    <input type="checkbox" class="checkbox" />
-                                </label>
-                            </th>
+                        <tr class="[&>*]:text-center">
                             <th>ID</th>
                             <th>Name</th>
                             <th>Price</th>
@@ -35,24 +30,14 @@ const fruitList:Fruit = JSON.parse(localItem);
                     <tbody>
                         <tr 
                        v-for="item of fruitList" :key="item.name"
-                        class="[&>*]:bg-[#1c1f25]">
-                            <th>
-                                <label>
-                                    <input type="checkbox" class="checkbox" />
-                                </label>
-                            </th>
+                        class="[&>*]:bg-[#1c1f25] [&>*]:text-center">
                             <td>
                                 <div>{{ item.id }}</div>
                             </td>
                             <td>
-                                <div class="flex items-center space-x-3">
-                                    <div>
-                                        <div class="font-bold">{{ item.name }}</div>
-                                    </div>
-                                </div>
-                            </td>
-                                
-                            <td>{{ item.price }}</td>
+                                <div class="font-bold capitalize">{{ item.name }}</div>
+                            </td> 
+                            <td>${{ item.price }}/each</td>
                             <td>{{ item.quantity }}</td>
                             <th>
                                 <div class="inline-grid">
