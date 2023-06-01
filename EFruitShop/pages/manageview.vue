@@ -1,6 +1,8 @@
 <script setup lang="ts">
-let fruitList = localStorage.getItem('newItem');
-console.log(fruitList);
+
+const localItem:string = localStorage.getItem('newItem') || "{}";
+const fruitList:Fruit = JSON.parse(localItem);
+
 </script>
 <template>
     <div>
@@ -32,7 +34,7 @@ console.log(fruitList);
                     </thead>
                     <tbody>
                         <tr 
-                          
+                       v-for="item of fruitList" :key="item.name"
                         class="[&>*]:bg-[#1c1f25]">
                             <th>
                                 <label>
@@ -40,18 +42,18 @@ console.log(fruitList);
                                 </label>
                             </th>
                             <td>
-                                <div class="mask mask-squircle w-12 h-12">1</div>
+                                <div>{{ item.id }}</div>
                             </td>
                             <td>
                                 <div class="flex items-center space-x-3">
                                     <div>
-                                        <div class="font-bold">Banana</div>
+                                        <div class="font-bold">{{ item.name }}</div>
                                     </div>
                                 </div>
                             </td>
                                 
-                            <td>666</td>
-                            <td>69</td>
+                            <td>{{ item.price }}</td>
+                            <td>{{ item.quantity }}</td>
                             <th>
                                 <div class="inline-grid">
                                 <button class="btn btn-warning btn-xl text-white my-2">
