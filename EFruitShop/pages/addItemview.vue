@@ -1,14 +1,9 @@
 <script setup lang="ts">
 import { Form, Field, ErrorMessage, defineRule  } from 'vee-validate';
-
-let isCreated = useCookie('isCreated', {
-    default: () => false,
-    watch: false
-})
+import { useToast, POSITION  } from "vue-toastification";
 
 let fruitList = useFruit();
 let userImage: any = null;
-
 
 defineRule('required', (value: string | any[]) => {
   if (!value || !value.length) {
@@ -41,10 +36,9 @@ function createImage(file: any) {
     }
     reader.readAsDataURL(file)  
 }
-
 function onSubmit(values: any) {
     const item: Fruit = {
-        id: Math.ceil(Math.random()*1000000),
+            id: Math.ceil(Math.random()*1000000),
         name: values.name,
         price: values.price,
         quantity: values.quantity,
@@ -52,22 +46,18 @@ function onSubmit(values: any) {
     }    
     
     fruitList.value.unshift(item);
-    localStorage.setItem('newItem', JSON.stringify(fruitList.value, null, 2));
-    isCreated.value = true 
+    localStorage.setItem('newItem', JSON.stringify(fruitList.value, null, 2)); 
+    const toast = useToast();
+    toast.success("Created an item successfully!", {
+        timeout: 3000,
+        position: POSITION.BOTTOM_RIGHT,
+    });
 }
 </script>
 <template>
     <div>
         <Header>
         </Header>
-        <div v-if="isCreated" class="flex place-content-center">
-            <div class="alert alert-success shadow-lg m-full max-w-max">
-                <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                    <span>You created an item successfully!</span>
-                </div>
-            </div>
-        </div>
         <div class="flex place-content-center">
             <Form method="POST" @submit="onSubmit">
                 <div class="form-control w-full max-w-xs">

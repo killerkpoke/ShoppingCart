@@ -1,21 +1,24 @@
 <script setup lang="ts">
+import { useToast, POSITION  } from "vue-toastification";
 
 const localItem:string = localStorage.getItem('newItem') || "{}";
 const fruitList:Array<Fruit> = JSON.parse(localItem);
 const fruit = useFruit();
 
-let isDeleted = useCookie('isDeleted', {
-    default: () => false,
-    watch: false
-})
-
 function deleteItem(_fruit: Fruit) {
     const index = fruitList.indexOf(_fruit)
     if (index > -1) {
         fruitList.splice(index, 1);
+
         localStorage.setItem('newItem', JSON.stringify(fruitList));
+        
         fruit.value = fruitList;
-        isDeleted.value = true;
+        
+        const toast = useToast();
+        toast.success("Deleted an item successfully!", {
+            timeout: 3000,
+            position: POSITION.BOTTOM_RIGHT,
+        });
     }
 }
 </script>
