@@ -9,15 +9,13 @@ let isDeleted = useCookie('isDeleted', {
     watch: false
 })
 
-function deleteItem(id: number) {
-    for (let i = 0; i < fruitList.length; i++) {
-        if (fruitList[i].id == id) {
-            fruitList.splice(i);
-            localStorage.setItem('newItem', JSON.stringify(fruitList));
-            fruit.value = fruitList;
-            isDeleted.value = true;
-            break;
-        }
+function deleteItem(_fruit: Fruit) {
+    const index = fruitList.indexOf(_fruit)
+    if (index > -1) {
+        fruitList.splice(index, 1);
+        localStorage.setItem('newItem', JSON.stringify(fruitList));
+        fruit.value = fruitList;
+        isDeleted.value = true;
     }
 }
 </script>
@@ -72,7 +70,7 @@ function deleteItem(id: number) {
                                     </NuxtLink>
                                 </button>
                                 <button class="btn btn-error btn-xl text-white my-2"
-                                @click="deleteItem(item.id)">
+                                @click="deleteItem(item)">
                                     <!-- <NuxtLink to="/deleteItem"> -->
                                         Delete Item
                                     <!-- </NuxtLink> -->
