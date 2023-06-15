@@ -53,18 +53,18 @@ function onSubmit(values: any) {
     
     fruitList.value.unshift(item);
     localStorage.setItem('newItem', JSON.stringify(fruitList.value, null, 2));
-    isCreated.value = true  
+    isCreated.value = true 
 }
 </script>
 <template>
     <div>
         <Header>
         </Header>
-        <div v-if="isCreated">
-            <div class="alert alert-success shadow-lg">
+        <div v-if="isCreated" class="flex place-content-center">
+            <div class="alert alert-success shadow-lg m-full max-w-max">
                 <div>
                     <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                    <span>Your purchase has been confirmed!</span>
+                    <span>You created an item successfully!</span>
                 </div>
             </div>
         </div>
