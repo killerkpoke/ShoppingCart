@@ -4,11 +4,14 @@ const localItem:string = localStorage.getItem('newItem') || "{}";
 const fruitList:Array<Fruit> = JSON.parse(localItem);
 
 function deleteItem(id: number) {
-    // for (let i = 0; i < fruitList.length; ++i) {
-    //     if (fruitList[i].id == id) {
-    //         fruitList.splice(i);
-    //     }
-    // }
+    for (let i = 0; i < fruitList.length; i++) {
+        if (fruitList[i].id == id) {
+            fruitList.splice(i);
+            // update the fruit state
+            localStorage.setItem('newItem', JSON.stringify(fruitList))
+            break;
+        }
+    }
 }
 </script>
 <template>
