@@ -50,11 +50,13 @@ function onSubmit(values: any) {
         name: values.name,
         price: values.price,
         quantity: values.quantity,
-        image: values.image
+        description: values.description,
+        image: localStorage.getItem('newItemImg')
     }
     let tempList = [];
     tempList.push(item);
     localStorage.setItem('newItem', JSON.stringify(tempList, null, 2)); 
+    localStorage.removeItem('newItemImg');
     const toast = useToast();
     toast.success("Created an item successfully!", {
         timeout: 3000,
@@ -91,12 +93,19 @@ function onSubmit(values: any) {
                 </div>
                 <div class="form-control w-full max-w-xs">
                     <label class="label">
+                        <span class="label-text">Item description</span>
+                    </label>
+                    <Field name="description" type="text" rules="required" as="textarea" class="input w-full max-w-xs bg-white h-40 text-black" ></Field>
+                    <ErrorMessage name="quantity" class="text-red-500" />
+                </div>
+                <div class="form-control w-full max-w-xs">
+                    <label class="label">
                         <span class="label-text">Item image</span>
                     </label>
                     <Field name="file" type="file" @change="onFileChange" class="file-input file-input-bordered w-full max-w-xs" ></Field>
                     <img class="mt-6" :src="userImage" />
                 </div>
-                <button class="btn btn-primary mt-6">
+                <button class="btn btn-primary mt-6 mb-4">
                     Create Item
                 </button>
             </Form>

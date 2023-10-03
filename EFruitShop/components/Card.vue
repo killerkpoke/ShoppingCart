@@ -34,13 +34,13 @@
         <div class="border-t-4 border-gray-700 border-x-4 rounded-t-xl bg-[#e075b5] p-4 md:flex grid">
             <div class="mx-4">
                 <p class="text-center text-xl font-bold">{{prop.dummy.name}}</p>
-                <p class="text-center mt-10">{{ prop.dummy.desc }}</p>
+                <p class="text-center mt-10">{{ prop.dummy.description }}</p>
             </div>
             <img class="border-2 border-black rounded-xl w-32 h-32 place-self-center mt-4" src="https://icon-library.com/images/banana-icon/banana-icon-5.jpg"/>
         </div>
         <div class="border-b-4 border-gray-700 border-x-4 rounded-b-xl bg-[#f3a5d3] p-4 grid">
         <div> 
-            <div v-for="tag in prop.dummy.tags" :key="tag.id" class="tooltip tooltip-bottom mr-1" :data-tip="tag?.desc">
+            <div v-for="tag in prop.dummy.tags" :key="tag.id" class="tooltip tooltip-bottom mr-1" :data-tip="tag?.description">
                 <p class="font-bold p-3" :class="'badge badge-'+tag?.context">{{ tag?.name }}</p>
             </div>
             <div class="mt-2 font-bold">
