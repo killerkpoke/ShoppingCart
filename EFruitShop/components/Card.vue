@@ -11,7 +11,7 @@
     function add() {
         counter.value++
         localCounter.value++
-        price.value += prop.dummy.price
+        price.value += +prop.dummy.price
 
         const item = {
             "id": prop.dummy.id,
