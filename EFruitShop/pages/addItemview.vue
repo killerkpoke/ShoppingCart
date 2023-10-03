@@ -2,7 +2,6 @@
 import { Form, Field, ErrorMessage, defineRule  } from 'vee-validate';
 import { useToast, POSITION  } from "vue-toastification";
 
-let fruitList = useFruit();
 let userImage: any = null;
 
 defineRule('required', (value: string | any[]) => {
@@ -17,6 +16,15 @@ defineRule('minLength', (value: string | any[], [limit]: any) => {
   }
   if (value.length < limit) {
     return `This field must be at least ${limit} characters`;
+  }
+  return true;
+});
+defineRule('minEach', (value: number, [limit]: any) => {
+  if (!value) {
+    return true;
+  }
+  if (value <= +limit) {
+    return `This field must be bigger than ${limit}`;
   }
   return true;
 });
@@ -38,15 +46,15 @@ function createImage(file: any) {
 }
 function onSubmit(values: any) {
     const item: Fruit = {
-            id: Math.ceil(Math.random()*1000000),
+        id: Math.ceil(Math.random()*1000000),
         name: values.name,
         price: values.price,
         quantity: values.quantity,
         image: values.image
-    }    
-    
-    fruitList.value.unshift(item);
-    localStorage.setItem('newItem', JSON.stringify(fruitList.value, null, 2)); 
+    }
+    let tempList = [];
+    tempList.push(item);
+    localStorage.setItem('newItem', JSON.stringify(tempList, null, 2)); 
     const toast = useToast();
     toast.success("Created an item successfully!", {
         timeout: 3000,
@@ -64,21 +72,21 @@ function onSubmit(values: any) {
                     <label class="label">
                         <span class="label-text">Item name</span>
                     </label>
-                    <Field name="name" type="text" rules="required" class="input w-full max-w-xs bg-white text-black" ></Field>
+                    <Field name="name" type="text" rules="required|minLength:5" class="input w-full max-w-xs bg-white text-black" ></Field>
                     <ErrorMessage name="name" class="text-red-500" />
                 </div>
                 <div class="form-control w-full max-w-xs">
                     <label class="label">
                         <span class="label-text">Item price</span>
                     </label>
-                    <Field name="price" type="number" rules="required|minLength:3" class="input w-full max-w-xs bg-white text-black" ></Field>
+                    <Field name="price" type="number" rules="required|minEach:10" class="input w-full max-w-xs bg-white text-black" ></Field>
                     <ErrorMessage name="price" class="text-red-500" />
                 </div>
                 <div class="form-control w-full max-w-xs">
                     <label class="label">
                         <span class="label-text">Item quantity</span>
                     </label>
-                    <Field name="quantity" type="number" rules="required|minLength:3" class="input w-full max-w-xs bg-white text-black" ></Field>
+                    <Field name="quantity" type="number" rules="required|minEach:5" class="input w-full max-w-xs bg-white text-black" ></Field>
                     <ErrorMessage name="quantity" class="text-red-500" />
                 </div>
                 <div class="form-control w-full max-w-xs">
@@ -89,9 +97,7 @@ function onSubmit(values: any) {
                     <img class="mt-6" :src="userImage" />
                 </div>
                 <button class="btn btn-primary mt-6">
-                    <!-- <NuxtLink to="/manageview"> -->
-                        Create Item
-                    <!-- </NuxtLink> -->
+                    Create Item
                 </button>
             </Form>
         </div>
