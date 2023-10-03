@@ -49,8 +49,8 @@
             </div>
         </div>
         <button class="btn btn-primary mt-4 place-self-center capitalize" @click=add>
-            <label>Buy</label>
-            <label class="px-2">{{ localCounter }}x</label>    
+            <label class="cursor-pointer">Buy</label>
+            <label class="px-2 cursor-pointer">{{ localCounter }}x</label>
         </button>
         </div>
     </div>
