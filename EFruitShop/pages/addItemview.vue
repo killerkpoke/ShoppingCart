@@ -53,7 +53,7 @@ function onSubmit(values: any) {
         description: values.description,
         image: localStorage.getItem('newItemImg')
     }
-    let tempList = [];
+    let tempList = JSON.parse(localStorage.getItem('newItem') || "{}");
     tempList.push(item);
     localStorage.setItem('newItem', JSON.stringify(tempList, null, 2)); 
     localStorage.removeItem('newItemImg');
