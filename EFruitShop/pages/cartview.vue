@@ -4,7 +4,7 @@
 </script>
 
 <template>
-    <div>
+    <div class="min-h-screen">
         <Header></Header>
         <div class="w-auto flex place-content-center py-4">
             <table v-if="selectedItem.length != 0" class="table table-auto text-white">
@@ -14,15 +14,11 @@
                     <th>Overall Price</th>
                     <th>Quantity</th>
                 </tr>
-                <tr v-for="item in selectedItem" :key="item.id">
+                <tr class="text-center" v-for="item in selectedItem" :key="item.id">
                     <td>{{ item.name }}</td>
                     <td>{{ item.priceEach }}</td>
                     <td>{{ item.price }}</td>
-                    <td class="flex font-bold text-center">
-                        <button class="btn btn-primary text-xl">-</button>
-                        <p class="m-3">{{ item.quantity }}</p>
-                        <button class="btn btn-primary text-xl">+</button>
-                    </td>
+                    <td>{{ item.quantity }}</td>
                 </tr>
             </table>
             <p v-else class="text-red-400 font-bold- text-2xl">There is no item in the cart</p>
@@ -48,7 +44,6 @@
                 </button>
             </div>
         </div>
-        
         <Footer></Footer>
     </div>
 </template>
