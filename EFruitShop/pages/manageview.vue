@@ -1,18 +1,23 @@
 <script setup lang="ts">
 import { useToast, POSITION  } from "vue-toastification";
 
-const localItem:string = localStorage.getItem('newItem') || "{}";
-const fruitList:Array<Fruit> = JSON.parse(localItem);
-const fruit = useFruit();
+const localItem = useState('localData');
+const fruitList = useState('localFruit');
 
+onMounted(() => {
+    const data = localStorage.getItem('newItem') || "{}";
+    localItem.value = data;
+    fruitList.value = JSON.parse(data);
+})
+function updateItem(_fruit: Fruit) {
+    localStorage.setItem('updateItem', JSON.stringify(_fruit));
+}
 function deleteItem(_fruit: Fruit) {
-    const index = fruitList.indexOf(_fruit)
+    const index = fruitList.value.indexOf(_fruit)
     if (index > -1) {
-        fruitList.splice(index, 1);
-
-        localStorage.setItem('newItem', JSON.stringify(fruitList));
+        fruitList.value.splice(index, 1);
         
-        fruit.value = fruitList;
+        localStorage.setItem('newItem', JSON.stringify(fruitList.value));
         
         const toast = useToast();
         toast.success("Deleted an item successfully!", {
@@ -33,14 +38,6 @@ function deleteItem(_fruit: Fruit) {
                         Add new item
                     </NuxtLink>
                 </button>
-            </div>
-            <div v-if="isDeleted" class="flex place-content-center">
-                <div class="alert alert-warning shadow-lg my-6 m-full max-w-max">
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        <span>You deleted an item successfully!</span>
-                    </div>
-                </div>
             </div>
             <div class="overflow-x-auto w-full">
                 <table class="table w-full">
@@ -67,16 +64,15 @@ function deleteItem(_fruit: Fruit) {
                             <td>{{ item.quantity }}</td>
                             <th>
                                 <div class="inline-grid">
-                                <button class="btn btn-warning btn-xl text-white my-2">
+                                <button class="btn btn-warning btn-xl text-white my-2"
+                                @click="updateItem(item)">
                                     <NuxtLink to="/updateItemview">
                                         Update Item
                                     </NuxtLink>
                                 </button>
                                 <button class="btn btn-error btn-xl text-white my-2"
                                 @click="deleteItem(item)">
-                                    <!-- <NuxtLink to="/deleteItem"> -->
-                                        Delete Item
-                                    <!-- </NuxtLink> -->
+                                    Delete Item
                                 </button></div>
                             </th>
                         </tr>
